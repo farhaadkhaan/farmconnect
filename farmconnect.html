@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FarmConnect — Sell Direct. Earn More.</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --g900: #0d2b05;
+    --g800: #173404;
+    --g700: #27500A;
+    --g600: #3B6D11;
+    --g500: #639922;
+    --g400: #97C459;
+    --g200: #C0DD97;
+    --g100: #EAF3DE;
+    --g50:  #F5FAF0;
+    --a900: #412402;
+    --a700: #854F0B;
+    --a500: #BA7517;
+    --a400: #EF9F27;
+    --a200: #FAC775;
+    --a100: #FAEEDA;
+    --b600: #185FA5;
+    --b100: #E6F1FB;
+    --r600: #A32D2D;
+    --r100: #FCEBEB;
+    --t600: #0F6E56;
+    --t100: #E1F5EE;
+    --dark: #111a0d;
+    --card-bg: #fff;
+    --page-bg: #f4f7f0;
+    --border: #dde8d0;
+    --muted: #6b7c60;
+    --text: #1a2614;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--page-bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav {
+    background: var(--g900);
+    padding: 0 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    color: var(--g200);
+    letter-spacing: -0.5px;
+  }
+  .nav-brand span { color: var(--a400); }
+  .nav-links { display: flex; gap: 6px; }
+  .nav-link {
+    color: var(--g200);
+    text-decoration: none;
+    font-size: 13px;
+    padding: 6px 14px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: background 0.15s;
+    border: none;
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .nav-link:hover { background: rgba(192,221,151,0.1); }
+  .nav-link.active { background: var(--g700); color: #fff; }
+  .nav-btn {
+    background: var(--a400);
+    color: var(--a900);
+    border: none;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .nav-btn:hover { background: var(--a200); }
+
+  /* ── PAGES ── */
+  .page { display: none; animation: fadeUp 0.3s ease; }
+  .page.active { display: block; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── HERO ── */
+  .hero {
+    background: linear-gradient(135deg, var(--g900) 0%, #1c3d0a 60%, #2e5a10 100%);
+    padding: 5rem 2rem 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23639922' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.2rem, 5vw, 3.8rem);
+    font-weight: 700;
+    color: #fff;
+    line-height: 1.15;
+    margin-bottom: 1rem;
+    position: relative;
+  }
+  .hero h1 em { color: var(--a400); font-style: normal; }
+  .hero p {
+    font-size: 17px;
+    color: var(--g200);
+    max-width: 520px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.6;
+    position: relative;
+  }
+  .hero-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; position: relative; }
+  .btn-primary {
+    background: var(--a400);
+    color: var(--a900);
+    border: none;
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .btn-primary:hover { background: var(--a200); transform: translateY(-1px); }
+  .btn-secondary {
+    background: transparent;
+    color: var(--g200);
+    border: 1px solid rgba(192,221,151,0.4);
+    padding: 13px 28px;
+    border-radius: 8px;
+    font-size: 15px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: border-color 0.15s, background 0.15s;
+  }
+  .btn-secondary:hover { border-color: var(--g200); background: rgba(192,221,151,0.08); }
+
+  .hero-stats {
+    display: flex;
+    justify-content: center;
+    gap: 3rem;
+    margin-top: 3.5rem;
+    padding-top: 2.5rem;
+    border-top: 1px solid rgba(192,221,151,0.15);
+    position: relative;
+  }
+  .hero-stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+    display: block;
+  }
+  .hero-stat-lbl { font-size: 12px; color: var(--g400); margin-top: 2px; }
+
+  /* ── SECTION ── */
+  .section { padding: 3rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--g900);
+    margin-bottom: 0.4rem;
+  }
+  .section-sub { font-size: 14px; color: var(--muted); margin-bottom: 2rem; }
+
+  /* ── FILTER BAR ── */
+  .filter-bar {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1.5rem;
+    align-items: center;
+  }
+  .filter-chip {
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 13px;
+    cursor: pointer;
+    border: 1px solid var(--border);
+    background: var(--card-bg);
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.15s;
+  }
+  .filter-chip:hover { border-color: var(--g500); color: var(--g700); }
+  .filter-chip.active { background: var(--g700); color: #fff; border-color: var(--g700); }
+  .search-box {
+    margin-left: auto;
+    padding: 7px 14px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 13px;
+    background: var(--card-bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    width: 200px;
+    outline: none;
+  }
+  .search-box:focus { border-color: var(--g500); }
+
+  /* ── LISTING GRID ── */
+  .listing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 16px;
+  }
+  .listing-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.1rem 1.2rem 1rem;
+    cursor: pointer;
+    transition: transform 0.15s, box-shadow 0.15s, border-color 0.15s;
+    position: relative;
+  }
+  .listing-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(27,80,10,0.1);
+    border-color: var(--g400);
+  }
+  .listing-card.featured { border-color: var(--a400); }
+  .featured-badge {
+    position: absolute;
+    top: -1px; right: 14px;
+    background: var(--a400);
+    color: var(--a900);
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 10px;
+    border-radius: 0 0 8px 8px;
+  }
+  .tag {
+    display: inline-block;
+    font-size: 10px;
+    padding: 3px 9px;
+    border-radius: 10px;
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+  .tag-grain   { background: var(--g100);  color: var(--g700); }
+  .tag-veg     { background: var(--t100);  color: var(--t600); }
+  .tag-fruit   { background: var(--a100);  color: var(--a700); }
+  .tag-dairy   { background: var(--b100);  color: var(--b600); }
+  .tag-spice   { background: #fdf0f0; color: #8b2020; }
+  .tag-pulses  { background: #f5f0e8; color: #7a5c1e; }
+  .tag-organic { background: var(--g100); color: var(--g600); }
+
+  .card-name { font-size: 15px; font-weight: 500; color: var(--text); margin-bottom: 3px; }
+  .card-farmer { font-size: 12px; color: var(--muted); margin-bottom: 12px; display: flex; align-items: center; gap: 4px; }
+  .card-farmer svg { width: 11px; height: 11px; flex-shrink: 0; }
+  .card-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+  .card-price { font-size: 20px; font-weight: 500; color: var(--g700); line-height: 1; }
+  .card-unit  { font-size: 11px; color: var(--muted); margin-top: 2px; }
+  .card-qty   { font-size: 11px; color: var(--muted); margin-top: 1px; }
+  .contact-btn {
+    background: var(--g700);
+    color: #fff;
+    border: none;
+    padding: 7px 14px;
+    border-radius: 7px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 500;
+    transition: background 0.15s;
+  }
+  .contact-btn:hover { background: var(--g600); }
+  .rating { font-size: 11px; color: var(--a500); margin-top: 6px; }
+
+  /* ── MODAL ── */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.5);
+    z-index: 200;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+  }
+  .modal-overlay.open { display: flex; }
+  .modal {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 2rem;
+    max-width: 480px;
+    width: 100%;
+    position: relative;
+    animation: fadeUp 0.25s ease;
+  }
+  .modal h2 { font-family: 'Playfair Display', serif; font-size: 22px; margin-bottom: 0.3rem; }
+  .modal-close {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    background: var(--page-bg);
+    border: none;
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    display: flex; align-items: center; justify-content: center;
+    color: var(--muted);
+  }
+  .modal-section { margin-top: 1.2rem; }
+  .modal-label { font-size: 12px; color: var(--muted); margin-bottom: 4px; }
+  .modal-val { font-size: 15px; color: var(--text); font-weight: 500; }
+  .modal-divider { border: none; border-top: 1px solid var(--border); margin: 1rem 0; }
+  .msg-box {
+    width: 100%;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 13px;
+    font-family: 'DM Sans', sans-serif;
+    resize: none;
+    min-height: 80px;
+    color: var(--text);
+    background: var(--card-bg);
+    outline: none;
+    margin-top: 8px;
+  }
+  .msg-box:focus { border-color: var(--g500); }
+  .modal-actions { display: flex; gap: 10px; margin-top: 1rem; }
+  .modal-btn-primary {
+    flex: 1;
+    background: var(--g700);
+    color: #fff;
+    border: none;
+    padding: 11px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+  .modal-btn-secondary {
+    flex: 1;
+    background: transparent;
+    color: var(--g700);
+    border: 1px solid var(--border);
+    padding: 11px;
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  /* ── SELL PAGE ── */
+  .sell-layout { display: grid; grid-template-columns: 1fr 340px; gap: 2rem; align-items: start; }
+  @media(max-width: 768px) { .sell-layout { grid-template-columns: 1fr; } }
+  .form-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 1.75rem;
+  }
+  .form-card h2 { font-family: 'Playfair Display', serif; font-size: 24px; margin-bottom: 0.25rem; }
+  .form-card .sub { font-size: 13px; color: var(--muted); margin-bottom: 1.5rem; }
+  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+  .form-row.full { grid-template-columns: 1fr; }
+  .form-group { display: flex; flex-direction: column; gap: 5px; }
+  .form-group label { font-size: 12px; color: var(--muted); font-weight: 500; letter-spacing: 0.3px; text-transform: uppercase; }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--card-bg);
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--g500); }
+  .form-group textarea { resize: vertical; min-height: 90px; }
+  .checkbox-row { display: flex; align-items: center; gap: 8px; margin-bottom: 14px; }
+  .checkbox-row input { width: 16px; height: 16px; accent-color: var(--g600); cursor: pointer; }
+  .checkbox-row label { font-size: 13px; color: var(--text); cursor: pointer; }
+  .submit-btn {
+    width: 100%;
+    padding: 13px;
+    background: var(--g700);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    margin-top: 8px;
+    transition: background 0.15s, transform 0.1s;
+  }
+  .submit-btn:hover { background: var(--g600); transform: translateY(-1px); }
+  .submit-btn:active { transform: translateY(0); }
+
+  .tips-card {
+    background: var(--g900);
+    border-radius: 16px;
+    padding: 1.5rem;
+    color: var(--g200);
+  }
+  .tips-card h3 { font-family: 'Playfair Display', serif; font-size: 18px; margin-bottom: 1rem; color: #fff; }
+  .tip { display: flex; gap: 10px; margin-bottom: 1rem; font-size: 13px; line-height: 1.5; }
+  .tip-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+  .price-tip {
+    background: rgba(239,159,39,0.12);
+    border: 1px solid rgba(239,159,39,0.25);
+    border-radius: 10px;
+    padding: 1rem;
+    margin-top: 1.5rem;
+  }
+  .price-tip .label { font-size: 11px; color: var(--a400); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
+  .mandi-prices { display: flex; flex-direction: column; gap: 6px; }
+  .mandi-row { display: flex; justify-content: space-between; font-size: 13px; }
+  .mandi-crop { color: var(--g200); }
+  .mandi-price { color: var(--a400); font-weight: 500; }
+
+  /* ── PROFIT PAGE ── */
+  .profit-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 2rem; }
+  .metric-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1.1rem 1.2rem;
+  }
+  .metric-label { font-size: 12px; color: var(--muted); margin-bottom: 6px; }
+  .metric-val { font-size: 26px; font-weight: 500; color: var(--g700); }
+  .metric-change { font-size: 12px; margin-top: 4px; }
+  .up { color: var(--g600); }
+  .down { color: var(--r600); }
+
+  .profit-body { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media(max-width:768px){ .profit-body { grid-template-columns: 1fr; } }
+
+  .table-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    overflow: hidden;
+  }
+  .table-header {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--border);
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .table-header small { font-size: 12px; color: var(--muted); font-weight: 400; }
+  .profit-table { width: 100%; border-collapse: collapse; }
+  .profit-table th {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 10px 1.25rem;
+    text-align: left;
+    background: var(--page-bg);
+  }
+  .profit-table td {
+    padding: 12px 1.25rem;
+    font-size: 13px;
+    border-top: 1px solid var(--border);
+    color: var(--text);
+  }
+  .profit-table tr:hover td { background: var(--g50); }
+  .status-badge {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-weight: 500;
+  }
+  .status-paid { background: var(--g100); color: var(--g700); }
+  .status-pending { background: var(--a100); color: var(--a700); }
+  .status-processing { background: var(--b100); color: var(--b600); }
+
+  .calc-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem;
+  }
+  .calc-card h3 { font-size: 16px; font-weight: 500; margin-bottom: 1.2rem; }
+  .calc-input-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .calc-input-row label { font-size: 13px; color: var(--muted); min-width: 100px; }
+  .calc-input-row input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: 'DM Sans', sans-serif;
+    color: var(--text);
+    background: var(--card-bg);
+    outline: none;
+  }
+  .calc-input-row input:focus { border-color: var(--g500); }
+  .calc-result {
+    background: var(--g100);
+    border: 1px solid var(--g200);
+    border-radius: 10px;
+    padding: 1.1rem;
+    margin-top: 1.2rem;
+    display: none;
+  }
+  .calc-result.show { display: block; }
+  .calc-result-row { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 13px; }
+  .calc-result-row .k { color: var(--g700); }
+  .calc-result-row .v { font-weight: 500; color: var(--g900); }
+  .calc-result-row.total .k { font-weight: 500; font-size: 15px; color: var(--g900); }
+  .calc-result-row.total .v { font-size: 22px; color: var(--g700); }
+  .middleman-note {
+    background: var(--a100);
+    border: 1px solid var(--a200);
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 12px;
+    color: var(--a700);
+    margin-top: 1rem;
+    line-height: 1.5;
+  }
+
+  /* ── BAR CHART ── */
+  .chart-bars {
+    display: flex;
+    align-items: flex-end;
+    gap: 8px;
+    height: 120px;
+    padding: 0 1.25rem 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .bar-col { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 4px; }
+  .bar {
+    width: 100%;
+    background: var(--g200);
+    border-radius: 4px 4px 0 0;
+    transition: background 0.2s;
+    min-height: 4px;
+    position: relative;
+  }
+  .bar:hover { background: var(--g500); }
+  .bar-lbl { font-size: 10px; color: var(--muted); }
+
+  /* ── CONNECT PAGE ── */
+  .connect-hero {
+    background: var(--g900);
+    border-radius: 16px;
+    padding: 2.5rem 2rem;
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--g200);
+  }
+  .connect-hero h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: #fff; margin-bottom: 0.5rem; }
+  .connect-hero p { font-size: 14px; max-width: 400px; margin: 0 auto 1.5rem; }
+  .connect-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px; }
+  .farmer-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.2rem;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  }
+  .avatar {
+    width: 48px; height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    font-size: 16px;
+    flex-shrink: 0;
+    font-family: 'Playfair Display', serif;
+  }
+  .avatar-g { background: var(--g100); color: var(--g700); }
+  .avatar-a { background: var(--a100); color: var(--a700); }
+  .avatar-t { background: var(--t100); color: var(--t600); }
+  .avatar-b { background: var(--b100); color: var(--b600); }
+  .farmer-name { font-size: 15px; font-weight: 500; margin-bottom: 2px; }
+  .farmer-loc { font-size: 12px; color: var(--muted); margin-bottom: 8px; }
+  .farmer-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 10px; }
+  .farmer-tag { font-size: 10px; padding: 2px 7px; background: var(--g100); color: var(--g700); border-radius: 8px; }
+  .farmer-stat { font-size: 12px; color: var(--muted); }
+  .farmer-stat strong { color: var(--text); }
+  .connect-btn {
+    margin-top: 10px;
+    width: 100%;
+    padding: 8px;
+    background: var(--g700);
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-size: 13px;
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: background 0.15s;
+  }
+  .connect-btn:hover { background: var(--g600); }
+
+  /* ── SUCCESS TOAST ── */
+  .toast {
+    position: fixed;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(100px);
+    background: var(--g900);
+    color: var(--g200);
+    padding: 12px 24px;
+    border-radius: 10px;
+    font-size: 14px;
+    z-index: 300;
+    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    white-space: nowrap;
+  }
+  .toast.show { transform: translateX(-50%) translateY(0); }
+
+  /* ── HOW IT WORKS ── */
+  .how-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
+  .how-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 1.5rem 1.2rem;
+    text-align: center;
+  }
+  .how-num {
+    width: 40px; height: 40px;
+    background: var(--g700);
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    margin: 0 auto 1rem;
+  }
+  .how-title { font-weight: 500; font-size: 15px; margin-bottom: 6px; }
+  .how-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--g900);
+    color: var(--g400);
+    text-align: center;
+    padding: 2rem;
+    font-size: 13px;
+    margin-top: 3rem;
+  }
+  footer span { color: var(--g200); }
+
+  /* ── RESPONSIVE ── */
+  @media(max-width: 600px) {
+    .hero { padding: 3rem 1.2rem 2.5rem; }
+    .section { padding: 2rem 1.2rem; }
+    .hero-stats { gap: 1.5rem; }
+    .form-row { grid-template-columns: 1fr; }
+    nav { padding: 0 1rem; }
+    .nav-links .nav-link:not(.active) { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">Farm<span>Connect</span></div>
+  <div class="nav-links">
+    <button class="nav-link active" onclick="showPage('home')">Home</button>
+    <button class="nav-link" onclick="showPage('browse')">Browse</button>
+    <button class="nav-link" onclick="showPage('sell')">Sell</button>
+    <button class="nav-link" onclick="showPage('profit')">Profits</button>
+    <button class="nav-link" onclick="showPage('connect')">Network</button>
+  </div>
+  <button class="nav-btn" onclick="showPage('sell')">+ List Produce</button>
+</nav>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div id="page-home" class="page active">
+  <div class="hero">
+    <h1>Sell Direct.<br><em>Earn What You Deserve.</em></h1>
+    <p>FarmConnect removes the middlemen. Connect directly with buyers, get fair prices, and grow your farming business.</p>
+    <div class="hero-cta">
+      <button class="btn-primary" onclick="showPage('sell')">Start Selling</button>
+      <button class="btn-secondary" onclick="showPage('browse')">Browse Produce</button>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="hero-stat-num">₹18.4L</span>
+        <div class="hero-stat-lbl">sold this month</div>
+      </div>
+      <div>
+        <span class="hero-stat-num">247</span>
+        <div class="hero-stat-lbl">active farmers</div>
+      </div>
+      <div>
+        <span class="hero-stat-num">92%</span>
+        <div class="hero-stat-lbl">avg profit increase</div>
+      </div>
+      <div>
+        <span class="hero-stat-num">18</span>
+        <div class="hero-stat-lbl">states covered</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">How it works</div>
+    <div class="section-sub">Simple. Fast. Profitable.</div>
+    <div class="how-grid">
+      <div class="how-card">
+        <div class="how-num">1</div>
+        <div class="how-title">Create your listing</div>
+        <div class="how-desc">Post your produce with photos, price, quantity and location in under 2 minutes.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">2</div>
+        <div class="how-title">Buyers contact you</div>
+        <div class="how-desc">Verified buyers — retailers, restaurants, direct consumers — message you directly.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">3</div>
+        <div class="how-title">Negotiate & agree</div>
+        <div class="how-desc">Chat and finalize price, delivery terms, and payment method directly with buyers.</div>
+      </div>
+      <div class="how-card">
+        <div class="how-num">4</div>
+        <div class="how-title">Get paid, grow</div>
+        <div class="how-desc">Receive payment and build a reputation. Repeat buyers come back for every harvest.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ BROWSE ═══════════════ -->
+<div id="page-browse" class="page">
+  <div class="section">
+    <div class="section-title">Fresh listings</div>
+    <div class="section-sub">Direct from farm — no middlemen, fair prices</div>
+    <div class="filter-bar">
+      <button class="filter-chip active" onclick="filterCategory(this,'all')">All</button>
+      <button class="filter-chip" onclick="filterCategory(this,'grain')">Grains</button>
+      <button class="filter-chip" onclick="filterCategory(this,'veg')">Vegetables</button>
+      <button class="filter-chip" onclick="filterCategory(this,'fruit')">Fruits</button>
+      <button class="filter-chip" onclick="filterCategory(this,'dairy')">Dairy</button>
+      <button class="filter-chip" onclick="filterCategory(this,'spice')">Spices</button>
+      <button class="filter-chip" onclick="filterCategory(this,'pulses')">Pulses</button>
+      <input class="search-box" type="text" placeholder="Search produce..." oninput="searchListings(this.value)">
+    </div>
+    <div class="listing-grid" id="listing-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ SELL ═══════════════ -->
+<div id="page-sell" class="page">
+  <div class="section">
+    <div class="sell-layout">
+      <div class="form-card">
+        <h2>List your produce</h2>
+        <p class="sub">Fill in the details below. Your listing goes live instantly.</p>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Produce name *</label>
+            <input type="text" id="f-name" placeholder="e.g. Basmati Rice, Alphonso Mango">
+          </div>
+          <div class="form-group">
+            <label>Category *</label>
+            <select id="f-cat">
+              <option value="">Select category</option>
+              <option value="grain">Grains & Cereals</option>
+              <option value="veg">Vegetables</option>
+              <option value="fruit">Fruits</option>
+              <option value="dairy">Dairy & Eggs</option>
+              <option value="spice">Spices & Herbs</option>
+              <option value="pulses">Pulses & Legumes</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your price (₹) *</label>
+            <input type="number" id="f-price" placeholder="0">
+          </div>
+          <div class="form-group">
+            <label>Unit *</label>
+            <select id="f-unit">
+              <option>per kg</option>
+              <option>per quintal</option>
+              <option>per tonne</option>
+              <option>per litre</option>
+              <option>per dozen</option>
+              <option>per 100g</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Available quantity *</label>
+            <input type="text" id="f-qty" placeholder="e.g. 500 kg, 2 tonnes">
+          </div>
+          <div class="form-group">
+            <label>Location (District, State) *</label>
+            <input type="text" id="f-loc" placeholder="e.g. Amritsar, Punjab">
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label>Your name *</label>
+            <input type="text" id="f-farmer" placeholder="Full name">
+          </div>
+          <div class="form-group">
+            <label>Contact number *</label>
+            <input type="tel" id="f-phone" placeholder="+91 XXXXX XXXXX">
+          </div>
+        </div>
+        <div class="form-row full">
+          <div class="form-group">
+            <label>Description</label>
+            <textarea id="f-desc" placeholder="Quality grade, certification (organic, FPO), harvest date, delivery availability, minimum order..."></textarea>
+          </div>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="f-organic">
+          <label for="f-organic">Certified organic produce</label>
+        </div>
+        <div class="checkbox-row">
+          <input type="checkbox" id="f-delivery">
+          <label for="f-delivery">I can arrange delivery</label>
+        </div>
+        <button class="submit-btn" onclick="submitListing()">Post listing — go live now</button>
+      </div>
+
+      <div>
+        <div class="tips-card">
+          <h3>Tips to sell fast</h3>
+          <div class="tip"><div class="tip-icon">📸</div><div>Add a clear photo of your produce — listings with photos get 3× more inquiries.</div></div>
+          <div class="tip"><div class="tip-icon">💰</div><div>Price slightly below mandi to attract bulk buyers looking for better deals.</div></div>
+          <div class="tip"><div class="tip-icon">📅</div><div>Mention harvest date so buyers know freshness — critical for perishables.</div></div>
+          <div class="tip"><div class="tip-icon">🤝</div><div>Offer small free samples to build your first buyer relationships.</div></div>
+
+          <div class="price-tip">
+            <div class="label">Today's mandi prices</div>
+            <div class="mandi-prices">
+              <div class="mandi-row"><span class="mandi-crop">Wheat</span><span class="mandi-price">₹21–24/kg</span></div>
+              <div class="mandi-row"><span class="mandi-crop">Basmati Rice</span><span class="mandi-price">₹38–45/kg</span></div>
+              <div class="mandi-row"><span class="mandi-crop">Tomato</span><span class="mandi-price">₹22–30/kg</span></div>
+              <div class="mandi-row"><span class="mandi-crop">Onion</span><span class="mandi-price">₹18–25/kg</span></div>
+              <div class="mandi-row"><span class="mandi-crop">Potato</span><span class="mandi-price">₹12–16/kg</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PROFIT ═══════════════ -->
+<div id="page-profit" class="page">
+  <div class="section">
+    <div class="section-title">Profit tracker</div>
+    <div class="section-sub">Track your earnings and calculate your margins</div>
+
+    <div class="profit-grid">
+      <div class="metric-card">
+        <div class="metric-label">Total revenue</div>
+        <div class="metric-val">₹2.84L</div>
+        <div class="metric-change up">↑ 34% vs last month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Net profit</div>
+        <div class="metric-val">₹1.97L</div>
+        <div class="metric-change up">↑ 41% vs last month</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Active listings</div>
+        <div class="metric-val">8</div>
+        <div class="metric-change up">3 new this week</div>
+      </div>
+      <div class="metric-card">
+        <div class="metric-label">Total buyers</div>
+        <div class="metric-val">23</div>
+        <div class="metric-change up">↑ 5 new buyers</div>
+      </div>
+    </div>
+
+    <!-- Bar chart -->
+    <div class="table-card" style="margin-bottom:1.5rem;">
+      <div class="table-header">Monthly revenue <small>last 6 months</small></div>
+      <div class="chart-bars" id="chart-bars"></div>
+    </div>
+
+    <div class="profit-body">
+      <div class="table-card">
+        <div class="table-header">Recent transactions <small>this month</small></div>
+        <table class="profit-table">
+          <thead>
+            <tr>
+              <th>Produce</th>
+              <th>Buyer</th>
+              <th>Amount</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Basmati Rice 400kg</td><td>Rajesh Traders</td><td style="color:var(--g700);font-weight:500">₹16,800</td><td><span class="status-badge status-paid">Paid</span></td></tr>
+            <tr><td>Organic Wheat 1T</td><td>Urban Kirana</td><td style="color:var(--g700);font-weight:500">₹38,000</td><td><span class="status-badge status-paid">Paid</span></td></tr>
+            <tr><td>Tomatoes 200kg</td><td>Hotel Sunflower</td><td style="color:var(--g700);font-weight:500">₹5,600</td><td><span class="status-badge status-pending">Pending</span></td></tr>
+            <tr><td>Alphonso Mango 50dz</td><td>FreshBox Delhi</td><td style="color:var(--g700);font-weight:500">₹9,000</td><td><span class="status-badge status-processing">Processing</span></td></tr>
+            <tr><td>A2 Milk 300L</td><td>Morning Fresh</td><td style="color:var(--g700);font-weight:500">₹19,500</td><td><span class="status-badge status-paid">Paid</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="calc-card">
+        <h3>Profit calculator</h3>
+        <div class="calc-input-row">
+          <label>Selling price (₹)</label>
+          <input type="number" id="c-price" placeholder="per kg" oninput="recalc()">
+        </div>
+        <div class="calc-input-row">
+          <label>Quantity (kg)</label>
+          <input type="number" id="c-qty" placeholder="kg" oninput="recalc()">
+        </div>
+        <div class="calc-input-row">
+          <label>Cost per kg (₹)</label>
+          <input type="number" id="c-cost" placeholder="your cost" oninput="recalc()">
+        </div>
+        <div class="calc-input-row">
+          <label>Transport (₹)</label>
+          <input type="number" id="c-transport" placeholder="total transport" oninput="recalc()">
+        </div>
+        <div class="calc-result" id="calc-result">
+          <div class="calc-result-row"><span class="k">Gross revenue</span><span class="v" id="r-gross">—</span></div>
+          <div class="calc-result-row"><span class="k">Total cost</span><span class="v" id="r-cost">—</span></div>
+          <div class="calc-result-row"><span class="k">Platform fee (2%)</span><span class="v" id="r-fee">—</span></div>
+          <hr style="border:none;border-top:1px solid #C0DD97;margin:8px 0">
+          <div class="calc-result-row total"><span class="k">Net profit</span><span class="v" id="r-profit">—</span></div>
+        </div>
+        <div class="middleman-note">
+          💡 Typical middlemen take <strong>25–35% margin</strong>. Selling direct on FarmConnect keeps that money in your pocket. Only a 2% platform fee applies.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CONNECT ═══════════════ -->
+<div id="page-connect" class="page">
+  <div class="section">
+    <div class="connect-hero">
+      <h2>Farmer Network</h2>
+      <p>Connect with fellow farmers. Share knowledge, form cooperatives, and negotiate bulk deals together.</p>
+      <button class="btn-primary" onclick="showToast('Profile created! You are now discoverable in the network.')">Join the network</button>
+    </div>
+    <div class="section-title">Farmers near you</div>
+    <div class="section-sub" style="margin-bottom:1.5rem">Farmers within 200km · 38 active this week</div>
+    <div class="connect-grid" id="connect-grid"></div>
+  </div>
+</div>
+
+<!-- ═══════════════ MODAL ═══════════════ -->
+<div class="modal-overlay" id="modal-overlay" onclick="closeModal(event)">
+  <div class="modal">
+    <button class="modal-close" onclick="closeModal()">×</button>
+    <h2 id="m-name">Produce Name</h2>
+    <div style="font-size:13px;color:var(--muted);margin-top:4px" id="m-farmer"></div>
+    <hr class="modal-divider">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1rem">
+      <div class="modal-section"><div class="modal-label">Price</div><div class="modal-val" id="m-price"></div></div>
+      <div class="modal-section"><div class="modal-label">Available</div><div class="modal-val" id="m-qty"></div></div>
+      <div class="modal-section"><div class="modal-label">Location</div><div class="modal-val" id="m-loc"></div></div>
+      <div class="modal-section"><div class="modal-label">Contact</div><div class="modal-val" id="m-phone"></div></div>
+    </div>
+    <div class="modal-section" style="margin-top:1rem"><div class="modal-label">Description</div><div style="font-size:14px;color:var(--text);margin-top:4px;line-height:1.6" id="m-desc"></div></div>
+    <hr class="modal-divider">
+    <div class="modal-label">Send a message to this farmer</div>
+    <textarea class="msg-box" id="msg-box" placeholder="Hi, I am interested in buying your produce. Can you share more details about delivery?"></textarea>
+    <div class="modal-actions">
+      <button class="modal-btn-primary" onclick="sendMessage()">Send message</button>
+      <button class="modal-btn-secondary" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<footer>
+  <strong style="font-family:'Playfair Display',serif;color:var(--g200);font-size:18px">FarmConnect</strong><br><br>
+  Empowering Indian farmers since 2024 · <span>247 farmers</span> · <span>18 states</span><br>
+  <div style="margin-top:0.5rem;opacity:0.6">Platform fee: 2% per transaction · Helpline: 1800-FARM-00</div>
+</footer>
+
+<script>
+const listings = [
+  { id:1, name:'Basmati Rice (Grade A)', farmer:'Ramesh Kumar', loc:'Amritsar, Punjab', price:'₹42', unit:'per kg', qty:'800 kg', cat:'grain', phone:'+91 98765 43210', desc:'Premium Pusa Basmati 1121 variety. Hand-sorted, polished. Available immediately. Minimum order 50kg. Free delivery above 200kg within Punjab.', featured:true, rating:4.8, reviews:24 },
+  { id:2, name:'Organic Tomatoes', farmer:'Priya Devi', loc:'Nashik, Maharashtra', price:'₹28', unit:'per kg', qty:'300 kg', cat:'veg', phone:'+91 87654 32109', desc:'Certified organic. No pesticides used. Harvested 2 days ago. Available for pickup or local delivery. Perfect for restaurant and retail use.', featured:false, rating:4.6, reviews:18 },
+  { id:3, name:'Alphonso Mangoes', farmer:'Ganesh Patil', loc:'Ratnagiri, Maharashtra', price:'₹180', unit:'per dozen', qty:'400 dozen', cat:'fruit', phone:'+91 76543 21098', desc:'GI-tagged Hapus mangoes. Sweet, aromatic, naturally ripened. No carbide used. Season: April–June. Book advance orders for guaranteed supply.', featured:true, rating:4.9, reviews:41 },
+  { id:4, name:'Fresh A2 Cow Milk', farmer:'Sunita Yadav', loc:'Mathura, UP', price:'₹65', unit:'per litre', qty:'50 L/day', cat:'dairy', phone:'+91 65432 10987', desc:'Pure A2 milk from desi Gir cows. Collected twice daily. No additives. Subscription available — daily or alternate day delivery in Mathura district.', featured:false, rating:4.7, reviews:33 },
+  { id:5, name:'Green Chillies (Fresh)', farmer:'Abdul Majid', loc:'Guntur, Andhra Pradesh', price:'₹35', unit:'per kg', qty:'600 kg', cat:'spice', phone:'+91 54321 09876', desc:'Fiery Guntur variety. Freshly picked. High capsaicin content. Ideal for processing units, restaurants, pickle manufacturers. Bulk orders welcome.', featured:false, rating:4.5, reviews:12 },
+  { id:6, name:'Organic Wheat Flour', farmer:'Harpreet Singh', loc:'Ludhiana, Punjab', price:'₹38', unit:'per kg', qty:'1.2 tonnes', cat:'grain', phone:'+91 43210 98765', desc:'Stone-ground whole wheat flour. Certified organic. Preservative-free. Rich in nutrients. Pack sizes: 1kg, 5kg, 25kg. Custom milling available.', featured:false, rating:4.4, reviews:9 },
+  { id:7, name:'Yellow Dal (Toor)', farmer:'Lakshmi Reddy', loc:'Gulbarga, Karnataka', price:'₹95', unit:'per kg', qty:'2 tonnes', cat:'pulses', phone:'+91 32109 87654', desc:'Medium grain toor dal. Clean, sorted. No stones or debris. Moisture controlled storage. Suitable for retail packaging. Min order 50kg.', featured:false, rating:4.6, reviews:21 },
+  { id:8, name:'Turmeric (Rajapore)', farmer:'Mohan Pawar', loc:'Sangli, Maharashtra', price:'₹120', unit:'per kg', qty:'500 kg', cat:'spice', phone:'+91 21098 76543', desc:'7% curcumin content Rajapore variety. Sun-dried and polished. Ideal for export and premium spice brands. Certificate of analysis available.', featured:true, rating:4.9, reviews:37 },
+  { id:9, name:'Fresh Cauliflower', farmer:'Dinesh Sharma', loc:'Agra, UP', price:'₹22', unit:'per kg', qty:'400 kg', cat:'veg', phone:'+91 19876 54321', desc:'Large, tight curds. No discoloration. Harvested every alternate day. Suitable for retail and hotel supply. Next harvest in 2 days.', featured:false, rating:4.3, reviews:8 },
+  { id:10, name:'Organic Black Pepper', farmer:'Thomas Kurien', loc:'Wayanad, Kerala', price:'₹420', unit:'per kg', qty:'80 kg', cat:'spice', phone:'+91 89012 34567', desc:'Single-origin estate pepper. Sun-dried on rooftops. Bold aroma. Popular with specialty spice importers and Ayurvedic companies. Limited stock.', featured:true, rating:4.8, reviews:29 },
+  { id:11, name:'Country Eggs (Desi)', farmer:'Kamala Devi', loc:'Coimbatore, Tamil Nadu', price:'₹8', unit:'per egg', qty:'300/week', cat:'dairy', phone:'+91 78901 23456', desc:'Free-range country hens. Fed on grains and insects. Yolk is bright orange. Subscriptions available. Weekly delivery to Coimbatore city.', featured:false, rating:4.7, reviews:45 },
+  { id:12, name:'Red Onion (Nasik)', farmer:'Balaji Nimbalkar', loc:'Nashik, Maharashtra', price:'₹24', unit:'per kg', qty:'5 tonnes', cat:'veg', phone:'+91 67890 12345', desc:'Medium-large size, dry and firm skin. Storage quality: 3–4 months. Available for immediate dispatch. Loading at farm gate. Negotiable for bulk.', featured:false, rating:4.5, reviews:16 },
+];
+
+const farmers = [
+  { name:'Ramesh Kumar', loc:'Amritsar, Punjab', tags:['Rice','Wheat','Mustard'], crops:6, rating:4.8, av:'RK', col:'avatar-g' },
+  { name:'Priya Devi', loc:'Nashik, Maharashtra', tags:['Tomatoes','Grapes','Onion'], crops:4, rating:4.6, av:'PD', col:'avatar-a' },
+  { name:'Ganesh Patil', loc:'Ratnagiri, Maharashtra', tags:['Alphonso Mango','Cashew'], crops:3, rating:4.9, av:'GP', col:'avatar-t' },
+  { name:'Harpreet Singh', loc:'Ludhiana, Punjab', tags:['Wheat','Maize','Barley'], crops:5, rating:4.4, av:'HS', col:'avatar-b' },
+  { name:'Sunita Yadav', loc:'Mathura, UP', tags:['Milk','Ghee','Curd'], crops:3, rating:4.7, av:'SY', col:'avatar-g' },
+  { name:'Thomas Kurien', loc:'Wayanad, Kerala', tags:['Black Pepper','Cardamom','Coffee'], crops:4, rating:4.8, av:'TK', col:'avatar-a' },
+];
+
+let currentFilter = 'all';
+let currentSearch = '';
+
+function renderListings() {
+  const grid = document.getElementById('listing-grid');
+  let filtered = listings.filter(l => {
+    const matchCat = currentFilter === 'all' || l.cat === currentFilter;
+    const matchSearch = l.name.toLowerCase().includes(currentSearch) || l.farmer.toLowerCase().includes(currentSearch) || l.loc.toLowerCase().includes(currentSearch);
+    return matchCat && matchSearch;
+  });
+
+  grid.innerHTML = filtered.map(l => `
+    <div class="listing-card ${l.featured ? 'featured' : ''}" onclick="openModal(${l.id})">
+      ${l.featured ? '<div class="featured-badge">Featured</div>' : ''}
+      <span class="tag tag-${l.cat}">${catLabel(l.cat)}</span>
+      <div class="card-name">${l.name}</div>
+      <div class="card-farmer">
+        <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="6" cy="4" r="2"/><path d="M2 10c0-2.2 1.8-4 4-4s4 1.8 4 4"/></svg>
+        ${l.farmer} · ${l.loc}
+      </div>
+      <div class="card-footer">
+        <div>
+          <div class="card-price">${l.price}</div>
+          <div class="card-unit">${l.unit}</div>
+          <div class="card-qty">Available: ${l.qty}</div>
+        </div>
+        <button class="contact-btn" onclick="event.stopPropagation();openModal(${l.id})">Contact</button>
+      </div>
+      <div class="rating">★ ${l.rating} (${l.reviews} reviews)</div>
+    </div>
+  `).join('');
+}
+
+function catLabel(c) {
+  return {grain:'Grain',veg:'Vegetables',fruit:'Fruit',dairy:'Dairy',spice:'Spice',pulses:'Pulses'}[c] || c;
+}
+
+function filterCategory(el, cat) {
+  currentFilter = cat;
+  document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  renderListings();
+}
+
+function searchListings(val) {
+  currentSearch = val.toLowerCase();
+  renderListings();
+}
+
+function openModal(id) {
+  const l = listings.find(x => x.id === id);
+  if (!l) return;
+  document.getElementById('m-name').textContent = l.name;
+  document.getElementById('m-farmer').textContent = l.farmer + ' · ' + l.loc;
+  document.getElementById('m-price').textContent = l.price + ' ' + l.unit;
+  document.getElementById('m-qty').textContent = l.qty;
+  document.getElementById('m-loc').textContent = l.loc;
+  document.getElementById('m-phone').textContent = l.phone;
+  document.getElementById('m-desc').textContent = l.desc;
+  document.getElementById('msg-box').value = '';
+  document.getElementById('modal-overlay').classList.add('open');
+}
+
+function closeModal(e) {
+  if (!e || e.target === document.getElementById('modal-overlay')) {
+    document.getElementById('modal-overlay').classList.remove('open');
+  }
+}
+
+function sendMessage() {
+  const msg = document.getElementById('msg-box').value.trim();
+  if (!msg) return;
+  closeModal();
+  showToast('Message sent! The farmer will contact you shortly.');
+}
+
+function submitListing() {
+  const name = document.getElementById('f-name').value.trim();
+  const cat  = document.getElementById('f-cat').value;
+  const price = document.getElementById('f-price').value.trim();
+  const qty  = document.getElementById('f-qty').value.trim();
+  const loc  = document.getElementById('f-loc').value.trim();
+  const farmer = document.getElementById('f-farmer').value.trim();
+
+  if (!name || !cat || !price || !qty || !loc || !farmer) {
+    showToast('Please fill in all required fields.');
+    return;
+  }
+
+  const newListing = {
+    id: listings.length + 1,
+    name, farmer,
+    loc,
+    price: '₹' + price,
+    unit: document.getElementById('f-unit').value,
+    qty,
+    cat,
+    phone: document.getElementById('f-phone').value || '+91 XXXXX XXXXX',
+    desc: document.getElementById('f-desc').value || 'Fresh produce directly from the farm.',
+    featured: false,
+    rating: 5.0,
+    reviews: 0
+  };
+  listings.unshift(newListing);
+
+  ['f-name','f-price','f-qty','f-loc','f-farmer','f-phone','f-desc'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('f-cat').value = '';
+
+  showToast('🎉 Your listing is now live!');
+  setTimeout(() => showPage('browse'), 1500);
+}
+
+function recalc() {
+  const p = parseFloat(document.getElementById('c-price').value) || 0;
+  const q = parseFloat(document.getElementById('c-qty').value) || 0;
+  const c = parseFloat(document.getElementById('c-cost').value) || 0;
+  const t = parseFloat(document.getElementById('c-transport').value) || 0;
+  if (!p || !q) { document.getElementById('calc-result').classList.remove('show'); return; }
+  const gross = p * q;
+  const totalCost = c * q + t;
+  const fee = gross * 0.02;
+  const profit = gross - totalCost - fee;
+  document.getElementById('r-gross').textContent = '₹' + Math.round(gross).toLocaleString('en-IN');
+  document.getElementById('r-cost').textContent = '₹' + Math.round(totalCost).toLocaleString('en-IN');
+  document.getElementById('r-fee').textContent = '₹' + Math.round(fee).toLocaleString('en-IN');
+  document.getElementById('r-profit').textContent = '₹' + Math.round(profit).toLocaleString('en-IN');
+  document.getElementById('calc-result').classList.add('show');
+}
+
+function renderChart() {
+  const months = ['Nov','Dec','Jan','Feb','Mar','Apr'];
+  const vals   = [68000, 95000, 110000, 148000, 182000, 284000];
+  const max = Math.max(...vals);
+  const container = document.getElementById('chart-bars');
+  container.innerHTML = months.map((m,i) => `
+    <div class="bar-col">
+      <div class="bar" style="height:${Math.round((vals[i]/max)*100)}px" title="₹${vals[i].toLocaleString('en-IN')}"></div>
+      <div class="bar-lbl">${m}</div>
+    </div>
+  `).join('');
+}
+
+function renderConnect() {
+  const grid = document.getElementById('connect-grid');
+  grid.innerHTML = farmers.map(f => `
+    <div class="farmer-card">
+      <div class="avatar ${f.col}">${f.av}</div>
+      <div style="flex:1">
+        <div class="farmer-name">${f.name}</div>
+        <div class="farmer-loc">📍 ${f.loc}</div>
+        <div class="farmer-tags">${f.tags.map(t => `<span class="farmer-tag">${t}</span>`).join('')}</div>
+        <div class="farmer-stat"><strong>${f.crops}</strong> active listings · ★ ${f.rating}</div>
+        <button class="connect-btn" onclick="showToast('Connection request sent to ${f.name}!')">Connect</button>
+      </div>
+    </div>
+  `).join('');
+}
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  const links = ['home','browse','sell','profit','connect'];
+  const idx = links.indexOf(id);
+  if (idx >= 0) document.querySelectorAll('.nav-link')[idx].classList.add('active');
+  window.scrollTo(0,0);
+  if (id === 'browse') renderListings();
+  if (id === 'profit') renderChart();
+  if (id === 'connect') renderConnect();
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 3500);
+}
+
+renderListings();
+renderChart();
+renderConnect();
+</script>
+</body>
+</html>
